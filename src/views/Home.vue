@@ -25,7 +25,6 @@ export default {
 
           googleBooksApi.get('/volumes?q=neuromancer')
           .then(res => console.log("Google API", res.data))
-
       }
   },
 
