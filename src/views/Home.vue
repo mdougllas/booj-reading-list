@@ -20,7 +20,7 @@
 <script>
 import RegisterForm from '@/components/forms/RegisterForm.vue'
 import LoginForm from '@/components/forms/LoginForm.vue'
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     name: 'Home',

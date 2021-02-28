@@ -13,6 +13,10 @@
             {{ info }}
         </b-card-text>
 
+        <b-card-text class="font-weight-bold">
+            Number of pages: {{ pages }}
+        </b-card-text>
+
         <b-button :variant="variant" @click="buttonClicked">{{ buttonText }}</b-button>
         <b-button v-b-modal.modal-scrollable class="mt-3" v-if="buttonType === 2" variant="outline-primary" @click="showDetails">Show Details</b-button>
     </b-card>

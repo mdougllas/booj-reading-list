@@ -9,10 +9,6 @@ export default {
         id: null
     },
 
-    getters: {
-        currentToken: state => state.token
-    },
-
     mutations: {
         setName(state, payload){
             state.name = payload

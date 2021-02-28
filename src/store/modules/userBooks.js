@@ -10,6 +10,10 @@ export default {
             state.books = payload
         },
 
+        resetUserBooks(state) {
+            state.books = null
+        },
+
         addUserBook(state, payload){
             state.books = [...state.books, payload]
         },
@@ -18,8 +22,16 @@ export default {
             state.books = state.books.filter(e => e.id !== payload)
         },
 
-        resetUserBooks(state) {
-            state.books = null
+        reverseUserBooks(state){
+            state.books = state.books.reverse()
+        },
+
+        orderUserBooksByTitle(state){
+            state.books = state.books.sort((a, b) => a.title < b.title ? -1 : 1)
+        },
+
+        orderUserBooksByNumberOfPages(state){
+            state.books = state.books.sort((a, b) => a.pages < b.pages ? -1 : 1)
         }
     },
 
