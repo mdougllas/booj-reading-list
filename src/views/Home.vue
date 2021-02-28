@@ -1,35 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <div>Only a test</div>
-  </div>
+    <div class="home">
+        <div>
+            <b-jumbotron header="My Book List" lead="A book library that fits in your pocket.">
+                <div>
+                    <b-tabs content-class="mt-3" align="center">
+                        <b-tab title="Register">
+                            <RegisterForm />
+                        </b-tab>
+                        <b-tab title="Login" active>
+                            <LoginForm />
+                        </b-tab>
+                    </b-tabs>
+                </div>
+            </b-jumbotron>
+        </div>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import RegisterForm from '@/components/forms/RegisterForm.vue'
+import LoginForm from '@/components/forms/LoginForm.vue'
 import { bookListApi } from '@/apis/bookListApi.js'
-import { googleBooksApi } from '@/apis/googleBooksApi.js'
 
 export default {
-  name: 'Home',
+    name: 'Home',
 
-  components: {
-    HelloWorld
-  },
+    components: {
+        LoginForm,
+        RegisterForm
+    },
 
-  methods: {
-      testApi() {
-          bookListApi.get('/books')
-          .then(res => console.log("My own api", res.data))
+    methods: {
+        testApi() {
+            bookListApi.get('/books')
+            .then(res => console.log("My own api", res.data))
 
-          googleBooksApi.get('/volumes?q=neuromancer')
-          .then(res => console.log("Google API", res.data))
-      }
-  },
+            this.$store.dispatch('fetchBooks', 'Harry Potter')
+        }
+    },
 
-  mounted() {
-      this.testApi()
-  }
+    mounted() {
+        this.testApi()
+    }
 }
 </script>
