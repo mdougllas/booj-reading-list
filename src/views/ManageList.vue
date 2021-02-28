@@ -3,10 +3,10 @@
         <div>
             <b-jumbotron header="Book List Management" :lead="`${ user.name }, this is your book list.`">
                 <div>
-                    <b-button href="#" variant="primary" @click="goBack">Go back to search</b-button>
+                    <b-button variant="primary" @click="goBack">Go back to search</b-button>
                 </div>
                 <div class="mt-4">
-                    <ListingBooks :books="books" />
+                    <ListingBooks :books="books" :buttonType="2" />
                 </div>
             </b-jumbotron>
         </div>
@@ -39,6 +39,10 @@ export default {
         if(!this.user.token){
             this.$router.push('/')
         }
+    },
+
+    created() {
+        this.$store.dispatch('fetchUserBooks', this.user.token)
     }
 }
 </script>

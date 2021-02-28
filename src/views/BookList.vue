@@ -3,13 +3,13 @@
         <div>
             <b-jumbotron :header="`Welcome ${ user.name }`" lead="Now you can manage your list.">
                 <div>
-                    <b-button href="#" variant="primary" @click="goManage">Manage my list</b-button>
+                    <b-button variant="primary" @click="goManage">Manage my list</b-button>
                 </div>
                 <div>
                     <SearchField />
                 </div>
                 <div class="mt-4">
-                    <listing-books :books="books" />
+                    <listing-books :books="books" :buttonType="1" />
                 </div>
             </b-jumbotron>
         </div>

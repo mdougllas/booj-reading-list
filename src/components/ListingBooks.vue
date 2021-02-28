@@ -1,7 +1,13 @@
 <template>
 <div class="d-flex flex-wrap justify-content-around">
     <div v-for="book in books" :key="book.id" class="mx-2 my-4">
-        <BookCard :title="book.volumeInfo.title" :image="book.volumeInfo.imageLinks" :info="`${book.searchInfo ? book.searchInfo.textSnippet : 'No info for this title'}`" :pages="book.volumeInfo.pageCount" />
+        <BookCard
+            :title="book.volumeInfo.title"
+            :image="book.volumeInfo.imageLinks"
+            :info="`${book.searchInfo ? book.searchInfo.textSnippet : 'No info for this title'}`"
+            :pages="book.volumeInfo.pageCount"
+            :buttonType="buttonType"
+        />
     </div>
 </div>
 </template>
@@ -12,7 +18,7 @@ import { mapState } from 'vuex'
 
 export default {
     name: 'ListingBooks',
-    props: ['books'],
+    props: ['books', 'buttonType'],
 
     components: {
         BookCard
