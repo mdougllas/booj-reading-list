@@ -66,6 +66,8 @@
 
 <script>
     export default {
+        name: 'RegisterForm',
+
         data() {
             return {
                 name: null,
