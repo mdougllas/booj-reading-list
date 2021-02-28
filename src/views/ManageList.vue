@@ -1,15 +1,12 @@
 <template>
     <div class="home">
         <div>
-            <b-jumbotron :header="`Welcome ${ user.name }`" lead="Now you can manage your list.">
+            <b-jumbotron header="Book List Management" :lead="`${ user.name }, this is your book list.`">
                 <div>
-                    <b-button href="#" variant="primary" @click="goManage">Manage my list</b-button>
-                </div>
-                <div>
-                    <SearchField />
+                    <b-button href="#" variant="primary" @click="goBack">Go back to search</b-button>
                 </div>
                 <div class="mt-4">
-                    <listing-books :books="books" />
+                    <ListingBooks :books="books" />
                 </div>
             </b-jumbotron>
         </div>
@@ -18,18 +15,18 @@
 
 <script>
 import { mapState } from 'vuex'
-import SearchField from '@/components/forms/SearchField.vue'
 import ListingBooks from '@/components/ListingBooks.vue'
 
 export default {
+    name: 'ManageList',
+
     components: {
-        SearchField,
         ListingBooks
     },
 
     methods: {
-        goManage() {
-            this.$router.push('manage-list')
+        goBack() {
+            this.$router.push('book-list')
         }
     },
 
