@@ -20,7 +20,7 @@
 <script>
 import RegisterForm from '@/components/forms/RegisterForm.vue'
 import LoginForm from '@/components/forms/LoginForm.vue'
-import { bookListApi } from '@/apis/bookListApi.js'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'Home',
@@ -30,10 +30,20 @@ export default {
         RegisterForm
     },
 
+    computed: {
+        ...mapState(['user'])
+    },
+
+    beforeMount() {
+        if(this.user.token){
+            this.$router.push('book-list')
+        }
+    },
+
     methods: {
         testApi() {
-            bookListApi.get('/books')
-            .then(res => console.log("My own api", res.data))
+            // bookListApi.get('/books')
+            // .then(res => console.log("My own api", res.data))
 
             this.$store.dispatch('fetchBooks', 'Harry Potter')
         }

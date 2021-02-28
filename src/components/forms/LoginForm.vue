@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-row class="d-flex justify-content-center">
+        <b-row class="d-flex justify-content-center mt-4">
             <b-col sm="12" xl="6">
                 <b-form-group
                     class="text-center"
@@ -8,7 +8,7 @@
                     label-for="input-1"
                 >
                     <b-form-input
-                        v-model="form.email"
+                        v-model="email"
                         type="email"
                         placeholder="Enter email"
                         required
@@ -21,7 +21,7 @@
             <b-col sm="12" xl="6">
                 <b-form-group id="input-group-2" label="Your Password:" label-for="input-2">
                     <b-form-input
-                        v-model="form.password"
+                        v-model="password"
                         type="password"
                         placeholder="Enter password"
                         required
@@ -30,24 +30,33 @@
             </b-col>
         </b-row>
 
-        <b-button type="submit" variant="primary" class="mt-4">Start Reading</b-button>
+        <b-button
+            type="submit"
+            variant="primary"
+            class="mt-4"
+            @click="onSubmit"
+        >Start Reading</b-button>
     </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                form: {
-                    email: '',
-                    password: '',
-                },
-            }
-        },
-        methods: {
-            onSubmit() {
-                alert(JSON.stringify(this.form))
-            }
+export default {
+    data() {
+        return {
+            email: '',
+            password: '',
         }
-    }
+    },
+
+    methods: {
+        onSubmit() {
+            const data = {
+                email: this.email,
+                password: this.password
+            }
+
+            this.$store.dispatch('userLogin', data)
+        }
+    },
+}
 </script>

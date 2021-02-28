@@ -5,16 +5,18 @@ export default {
         search: 'neuromancer',
         result: null
     },
+
     mutations: {
-        setSearch({ search, result }, payload){
-            search = payload.search
-            result = payload.result
+        setSearch(state, payload){
+            state.search = payload.search
+            state.result = payload.result
         },
 
-        resetSearch({ search }, payload) {
-            search = payload
+        resetSearch(state, payload) {
+            state.search = payload
         }
     },
+
     actions: {
         fetchBooks({ commit }, payload){
             googleBooksApi.get(`/volumes?q=${payload}`)
