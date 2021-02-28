@@ -2,28 +2,46 @@ import { bookListApi } from '@/apis/bookListApi.js'
 
 export default {
     state: {
-        userBooks: []
+        books: []
     },
 
     mutations: {
         setUserBooks(state, payload){
-            state.userBooks = payload.userBooks
+            state.books = payload
+        },
+
+        addUserBook(state, payload){
+            state.books = [...state.books, payload]
+        },
+
+        removeUserBook(state, payload){
+            state.books = state.books.filter(e => e.id !== payload)
         },
 
         resetUserBooks(state) {
-            state.userBooks = null
+            state.books = null
         }
     },
 
     actions: {
         insertBook({ commit }, payload){
-            data = {
+            bookListApi.post('/books', payload.data, {
+                headers: { 'Authorization': `Bearer ${ payload.token }` }
+            })
+            .then(res => {
+                const { title, info, image, pages, id, google_id } = res.data
+                const payload = { title, info, pages, id, googleId: google_id, image: {thumbnail: image} }
 
-            }
+                commit('addUserBook', payload)
+            })
+        },
 
-            bookListApi.post('/books', {
-                headers: { 'Authorization': `Bearer ${ payload }` },
-                data: data
+        removeBook({ commit }, payload){
+            bookListApi.delete(`/books/${payload.id}`, {
+                headers: { 'Authorization': `Bearer ${ payload.token }` }
+            })
+            .then(() => {
+                commit('removeUserBook', payload.id)
             })
         },
 
@@ -32,18 +50,12 @@ export default {
                 headers: { 'Authorization': `Bearer ${ payload }` }
             })
             .then(res => {
-                console.log(res.data)
+                const payload = res.data.map(e => {
+                    const { title, info, image, pages, id, google_id } = e
+                    return { title, info, pages, id, googleId: google_id, image: {thumbnail: image}}
+                })
+                commit('setUserBooks', payload)
             })
-
-            // googleBooksApi.get(`/volumes?q=${payload}`)
-            // .then(res => {
-            //     console.log(res)
-            //     const searchBooks = {
-            //         search: payload,
-            //         result: res.data
-            //     }
-            //     commit('setSearch', searchBooks)
-            // })
         }
     },
 }

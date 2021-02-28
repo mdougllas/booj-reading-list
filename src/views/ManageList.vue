@@ -32,7 +32,7 @@ export default {
 
     computed: {
         ...mapState(['user']),
-        ...mapState({ books: state => state.bookSearch.result ? state.bookSearch.result.items : [] })
+        ...mapState({ books: state => state.userBooks.books })
     },
 
     beforeMount() {
@@ -42,7 +42,9 @@ export default {
     },
 
     created() {
-        this.$store.dispatch('fetchUserBooks', this.user.token)
+        if(this.user.token){
+            this.$store.dispatch('fetchUserBooks', this.user.token)
+        }
     }
 }
 </script>

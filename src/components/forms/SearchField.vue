@@ -9,7 +9,7 @@
                 <b-form-input
                     v-model="searchTerm"
                     type="email"
-                    placeholder="Title, Author, Categorie..."
+                    placeholder="Search anything..."
                     required
                 ></b-form-input>
             </b-form-group>
@@ -35,7 +35,7 @@ export default {
 
     methods: {
         onSubmit() {
-            console.log(this.searchTerm)
+            this.$store.dispatch('fetchBooks', this.searchTerm)
         }
     }
 }

@@ -5,6 +5,8 @@ export default {
     state: {
         name: null,
         email: null,
+        token: null,
+        id: null
     },
 
     getters: {
@@ -22,6 +24,10 @@ export default {
 
         setToken(state, payload){
             state.token = payload
+        },
+
+        setId(state, payload){
+            state.id = payload
         },
 
         resetUser(state) {
@@ -42,13 +48,14 @@ export default {
 
             bookListApi.post('/login', data)
             .then(res => {
-                const { name, email } = res.data.user
+                const { name, email, id } = res.data.user
                 const token = res.data.access_token
 
                 if(token){
                     commit('setName', name)
                     commit('setEmail', email)
                     commit('setToken', token)
+                    commit('setId', id)
 
                     router.push('book-list')
                 }
@@ -65,13 +72,14 @@ export default {
 
             bookListApi.post('/register', data)
             .then(res => {
-                const { name, email } = res.data.user
+                const { name, email, id } = res.data.user
                 const token = res.data.access_token
 
                 if(token){
                     commit('setName', name)
                     commit('setEmail', email)
                     commit('setToken', token)
+                    commit('setId', id)
 
                     router.push('book-list')
                 }

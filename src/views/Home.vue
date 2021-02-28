@@ -38,19 +38,6 @@ export default {
         if(this.user.token){
             this.$router.push('book-list')
         }
-    },
-
-    methods: {
-        testApi() {
-            // bookListApi.get('/books')
-            // .then(res => console.log("My own api", res.data))
-
-            this.$store.dispatch('fetchBooks', 'Harry Potter')
-        }
-    },
-
-    mounted() {
-        this.testApi()
     }
 }
 </script>
