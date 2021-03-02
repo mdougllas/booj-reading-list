@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div>
-            <b-jumbotron header="Book List Management" :lead="`${ user.name }, this is your book list.`">
+            <b-jumbotron header="Book Library" :lead="`${ user.name }, this is your book list.`">
                 <div>
                     <b-button variant="primary" @click="goBack">Go back to search</b-button>
                 </div>
